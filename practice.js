@@ -4,13 +4,16 @@ const app = express()
 
 app.use(express.json())
 
+app.use(express.urlencoded({ extended: false }))
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
 app.post('/api', (req, res) => {
     const data  = req.body
-    res.send('Data received successfully', data)
+    console.log(data)
+     res.send(data)
 })
 
 app.put('/api/:id', (req, res) => {
@@ -20,14 +23,20 @@ app.put('/api/:id', (req, res) => {
         message: `Data with id ${id} updated`,
         data: data
     })
+    console.log(data)
 })
 
+
 app.delete('/api/:id', (req, res) => {
+    const data  = req.body
     const id = req.params.id
     res.json({
         message: `Data with id ${id} deleted`
     })
+
+    console.log(data)
 })
+
 
 
 const port = 3000
