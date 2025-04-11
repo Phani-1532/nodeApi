@@ -1,4 +1,5 @@
-const express = require('express');
+const express = require('express')
+
 const app = express()
 
 app.use(express.json())
@@ -8,27 +9,29 @@ app.get('/', (req, res) => {
 })
 
 app.post('/api', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    res.send('Data received!')
+    const data  = req.body
+    res.send('Data received successfully', data)
 })
 
 app.put('/api/:id', (req, res) => {
-    const id = req.params.id;
-    const data = req.body;
-    console.log(`Updating data with ID: ${id}`, data);
-    res.send(`Data with ID ${id} updated!`)
+    const id = req.params.id
+    const data  = req.body
+    res.json({
+        message: `Data with id ${id} updated`,
+        data: data
+    })
 })
 
 app.delete('/api/:id', (req, res) => {
-    const id = req.params.id;
-    console.log(`Deleting data with ID: ${id}`);
-    res.send(`Data with ID ${id} deleted!`)
+    const id = req.params.id
+    res.json({
+        message: `Data with id ${id} deleted`
+    })
 })
 
 
-const PORT = 4000
+const port = 3000
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
+app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`)
 })
